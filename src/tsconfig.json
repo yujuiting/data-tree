@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noEmitOnError": true,
+    "noImplicitAny": false,
+    "outDir":"..",
+    "sourceMap": true,
+    "target": "es5",
+    "inlineSources": true,
+    "baseUrl": ".",
+    "paths": {
+      "@proj/*": ["./*"]
+    }
+  },
+
+  "files": [
+    "index.ts",
+    "typings.d.ts"
+  ]
+}
