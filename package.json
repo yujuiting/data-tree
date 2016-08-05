@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "typings install",
     "test": "karma start ./karma.conf.js",
-    "prebuild": "rm -rf ./dist",
+    "prebuild": "rm -rf ./index.{js,js.map,d.ts}",
     "build": "tsc -p ./src/tsconfig.json"
   },
   "author": "",
