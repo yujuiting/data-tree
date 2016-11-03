@@ -1,21 +1,23 @@
-const testWebpackFn = require('./webpack.test.js');
+// const testWebpackFn = require('./webpack.test.js');
 
 module.exports = function(config) {
-  const testWebpackConfig = testWebpackFn(config);
+  // const testWebpackConfig = testWebpackFn(config);
 
   config.set({
 
     basePath: './',
     
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', 'commonjs'],
 
     plugins: [
       require('karma-coverage'),
       require('karma-jasmine'),
-      require('karma-webpack'),
+      // require('karma-webpack'),
       require('karma-mocha-reporter'),
       require('karma-sourcemap-loader'),
-      require('karma-phantomjs-launcher')
+      require('karma-phantomjs-launcher'),
+      require('karma-typescript'),
+      require('karma-commonjs')
     ],
 
     /*
@@ -34,16 +36,18 @@ module.exports = function(config) {
     },
 
     files: [
-      { pattern: 'spec-bundle.js', included: true, watched: false }
+      // { pattern: 'spec-bundle.js', included: true, watched: false }
+      { pattern: 'src/**/*.ts' }
     ],
 
     exclude: [],
 
     preprocessors: {
-      'spec-bundle.js': [ 'coverage', 'webpack', 'sourcemap' ]
+      // 'spec-bundle.js': [ 'coverage', 'webpack', 'sourcemap' ]
+      '**/*.ts': [ 'karma-typescript', 'commonjs', 'coverage' ]
     },
 
-    webpack: testWebpackConfig,
+    // webpack: testWebpackConfig,
 
     coverageReporter: {
       dir: 'coverage/',
@@ -56,7 +60,7 @@ module.exports = function(config) {
     },
 
     // Webpack please don't spam the console when running in karma!
-    webpackServer: {noInfo: true},
+    // webpackServer: {noInfo: true},
 
     autoWatch: false,
 

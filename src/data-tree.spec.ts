@@ -1,5 +1,5 @@
-/// <reference path="./typings.d.ts" />
-import { DataTree } from './';
+import { DataTree } from './data-tree';
+
 describe('Class: DataTree', () => {
 
   let data = '12345';

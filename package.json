@@ -1,19 +1,17 @@
 {
-  "name": "data-tree",
+  "name": "@yujuiting/data-tree",
   "version": "0.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "data-tree.js",
   "scripts": {
-    "postinstall": "typings install",
     "test": "karma start ./karma.conf.js",
-    "prebuild": "rm -rf ./index.{js,js.map,d.ts}",
+    "prebuild": "rm -rf ./data-tree.{js,js.map,d.ts}",
     "build": "tsc -p ./src/tsconfig.json"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "awesome-typescript-loader": "^2.1.1",
-    "istanbul-instrumenter-loader": "^0.2.0",
+    "@types/jasmine": "^2.5.37",
     "jasmine-core": "^2.4.1",
     "karma": "^1.1.2",
     "karma-coverage": "^1.1.1",
@@ -21,12 +19,14 @@
     "karma-mocha-reporter": "^2.1.0",
     "karma-phantomjs-launcher": "^1.0.1",
     "karma-sourcemap-loader": "^0.3.7",
+    "karma-typescript": "^2.0.9",
     "karma-webpack": "^1.7.0",
     "source-map-loader": "^0.1.5",
     "tslint": "^3.14.0",
     "tslint-loader": "^2.1.5",
-    "typescript": "^2.0.0",
-    "typings": "^1.3.2",
-    "webpack": "^1.13.1"
+    "typescript": "^2.0.6"
+  },
+  "dependencies": {
+    "ts-helpers": "^1.1.2"
   }
 }

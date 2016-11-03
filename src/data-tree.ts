@@ -13,6 +13,14 @@ export class DataTree {
 
   get isLeaf(): boolean { return this.children.length === 0; }
 
+  static parse(src: DataTreeJSON): DataTree {
+    let dataTree = new DataTree(JSON.parse(src.data));
+
+    src.children.forEach(childSrc => dataTree.add(DataTree.parse(childSrc)));
+
+    return dataTree;
+  }
+
   constructor(public data: any,
               public parent: DataTree = null) {
     if (parent !== null) {
@@ -27,13 +35,13 @@ export class DataTree {
     return true;
   }
 
-  move(newParent: DataTree):boolean {
-    if (!this.isolate()) {
-      return false;
-    }
+  move(newParent: DataTree): boolean {
+    this.isolate();
+
     if (!newParent.add(this)) {
       return false;
     }
+
     return true;
   }
 
@@ -96,6 +104,21 @@ export class DataTree {
     return null;
   }
 
+  findParent(callback: DataTreeIterator): DataTree | null {
+    let queue: DataTree[] = [this];
+    let current: DataTree;
+    while (queue.length > 0) {
+      current = queue.shift();
+      if (!!current.parent) {
+        queue.push(current.parent);
+      }
+      if (callback(current)) {
+        return current;
+      }
+    }
+  }
+
+
   some(callback: DataTreeIterator): boolean {
     return this.find(callback) !== null;
   }
@@ -113,13 +136,10 @@ export class DataTree {
     return true;
   }
 
-  /**
-   * It's will try to stringfiy data.
-   */
   toJSON(): DataTreeJSON {
     return {
       children: this.children.map( child => child.toJSON()),
-      data: toString.call(this.data)
+      data: JSON.stringify(this.data)
     };
   }
 

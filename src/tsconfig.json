@@ -5,18 +5,16 @@
     "moduleResolution": "node",
     "noEmitOnError": true,
     "noImplicitAny": false,
-    "outDir":"..",
+    "noEmitHelpers": true,
     "sourceMap": true,
     "target": "es5",
+    "outDir": "../dist",
     "inlineSources": true,
-    "baseUrl": ".",
-    "paths": {
-      "@proj/*": ["./*"]
-    }
-  },
-
-  "files": [
-    "index.ts",
-    "typings.d.ts"
-  ]
+    "typeRoots": [
+      "../node_modules/@types"
+    ],
+    "types": [
+      "jasmine"
+    ]
+  }
 }
