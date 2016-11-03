@@ -1,4 +1,5 @@
 export type DataTreeIterator = (child: DataTree) => void;
+export type DataTreeFilter = (child: DataTree) => boolean;
 
 export interface DataTreeJSON {
   children: DataTreeJSON[];
@@ -81,30 +82,30 @@ export class DataTree {
     }
   }
 
-  filter(callback: DataTreeIterator): DataTree[] {
+  filter(filter: DataTreeFilter): DataTree[] {
     let result: DataTree[] = [];
     this.forEach( child => {
-      if (callback.call(this, child)) {
+      if (filter.call(this, child)) {
         result.push(child);
       }
     });
     return result;
   }
 
-  find(callback: DataTreeIterator): DataTree | null {
+  find(filter: DataTreeFilter): DataTree | null {
     let queue: DataTree[] = [this];
     let curr: DataTree;
     while (queue.length > 0) {
       curr = queue.shift();
       curr.children.forEach(child => queue.push(child));
-      if (callback.call(this, curr)) {
+      if (filter.call(this, curr)) {
         return curr;
       }
     }
     return null;
   }
 
-  findParent(callback: DataTreeIterator): DataTree | null {
+  findParent(filter: DataTreeFilter): DataTree | null {
     let queue: DataTree[] = [this];
     let current: DataTree;
     while (queue.length > 0) {
@@ -112,24 +113,24 @@ export class DataTree {
       if (!!current.parent) {
         queue.push(current.parent);
       }
-      if (callback(current)) {
+      if (filter(current)) {
         return current;
       }
     }
   }
 
 
-  some(callback: DataTreeIterator): boolean {
-    return this.find(callback) !== null;
+  some(filter: DataTreeFilter): boolean {
+    return this.find(filter) !== null;
   }
 
-  every(callback: DataTreeIterator): boolean {
+  every(filter: DataTreeFilter): boolean {
     let queue: DataTree[] = [this];
     let curr: DataTree;
     while (queue.length > 0) {
       curr = queue.shift();
       curr.children.forEach(child => queue.push(child));
-      if (!callback.call(this, curr)) {
+      if (!filter.call(this, curr)) {
         return false;
       }
     }

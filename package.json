@@ -1,11 +1,11 @@
 {
   "name": "@yujuiting/data-tree",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "",
-  "main": "data-tree.js",
+  "main": "dist/data-tree.js",
   "scripts": {
     "test": "karma start ./karma.conf.js",
-    "prebuild": "rm -rf ./data-tree.{js,js.map,d.ts}",
+    "prebuild": "rm -rf dist",
     "build": "tsc -p ./src/tsconfig.json"
   },
   "author": "",

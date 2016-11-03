@@ -16,5 +16,8 @@
     "types": [
       "jasmine"
     ]
-  }
+  },
+  "exclude": [
+    "**/*.spec.*"
+  ]
 }
